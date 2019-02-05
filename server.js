@@ -10,7 +10,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Point static path to dist -- For building -- REMOVE
-app.use(express.static(path.join(__dirname, 'dist/my-project')));
+//app.use(express.static(path.join(__dirname, 'dist/my-project'))); // change to 'public'
+app.use(express.static(path.join(__dirname, 'public')));
 
 // CORS
 app.use(function(req, res, next) {
@@ -32,6 +33,10 @@ server.listen( port , () => console.log('Running on port 3200'));
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
+
+// app.get('*', function (req, res) {
+//   res.sendFile(path.join(__dirname, 'dist/index.html'));
+// });
 
 
 //require('./assignment/app')(app);
