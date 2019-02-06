@@ -108,12 +108,21 @@ form label {font-weight:bold}
   /*padding-right: 0px;*/
 /*}*/
 
+
 .cl-list-item-borderless {
   border-top: 0 none;
   border-bottom: 0 none;
   border-left: 0 none;
   border-right: 0 none;
 }
+
+.cl-list-group-borderless{
+  border-top: 0 none;
+  border-bottom: 0 none;
+  border-left: 0 none;
+  border-right: 0 none;
+}
+
 
 @media all and (orientation:portrait) {
   .hide-on-portrait{
