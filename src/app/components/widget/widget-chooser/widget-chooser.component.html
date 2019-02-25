@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <ul class="navbar-nav">
+    <li class="nav-item active col-1">
+      <a class="nav-link" routerLink = '/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget'>
+        <i class="fas fa-chevron-left fontawsome_icon"></i>
+      </a>
+    </li>
+    <li class="nav-item col-3">
+      <a class="navbar-brand cl-text-bold"
+         routerLink = '/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new'>Choose Widget</a>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="container-fluid cl-container-padding">
+  <ul class="list-group cl-list-group-borderless">
+    <!--<form (ngSubmit)="createWidget('HEADING')" #h ="ngForm">-->
+    <li class="list-group-item cl-list-item-borderless">
+      <!--<a type = "submit">Header</a>-->
+      <!--{{widget.widgetType}}='HEADING'-->
+      <!--<a [(ngModel)]="widget.widgetType" name="widgetType" #HEADING-->
+      <!--routerLink = '/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widgetId}}'>Header</a>-->
+      <a (click) = "createWidget('HEADING')" [routerLink]=url> Header </a>
+    </li>
+    <!--</form>-->
+
+    <li class="list-group-item cl-list-item-borderless">
+      <a routerLink = '/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new'>Label</a>
+    </li>
+
+    <li class="list-group-item cl-list-item-borderless">
+      <a routerLink = '/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new'>HTML</a>
+    </li>
+
+    <li class="list-group-item cl-list-item-borderless">
+      <a routerLink = '/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new'>Text Input</a>
+    </li>
+
+    <li class="list-group-item cl-list-item-borderless">
+      <a routerLink = '/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new'>Link</a>
+    </li>
+
+    <li class="list-group-item cl-list-item-borderless">
+      <a routerLink = '/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new'>Button</a>
+    </li>
+
+    <li class="list-group-item cl-list-item-borderless">
+      <!--<a href="widget-image.html">Image</a>-->
+      <!--<a routerLink = '/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widgetId}}'>Image</a>-->
+      <a (click) = "createWidget('IMAGE')" [routerLink]=url> Image </a>
+    </li>
+
+    <li class="list-group-item cl-list-item-borderless">
+      <!--<a href="widget-youtube.html">You Tube</a>-->
+      <!--<a routerLink = '/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widgetId}}'>YouTube</a>-->
+      <a (click) = "createWidget('YOUTUBE')" [routerLink]=url> YouTube </a>
+    </li>
+
+    <li class="list-group-item cl-list-item-borderless">
+      <a routerLink = '/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new'>Data Table</a>
+    </li>
+
+    <li class="list-group-item cl-list-item-borderless">
+      <a routerLink = '/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new'>Repeater</a>
+    </li>
+  </ul>
+</div>
+
+
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-bottom">
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="navbar-link navbar-brand" routerLink = '/user/{{userId}}'>
+        <i class="fas fa-user fontawsome_icon mr-auto cl-icon-color"></i>
+      </a>
+    </li>
+  </ul>
+</nav>
+
