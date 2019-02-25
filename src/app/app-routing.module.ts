@@ -20,7 +20,7 @@ import {WidgetYoutubeComponent} from './components/widget/widget-edit/widget-you
 
 
 const appRoutes: Routes = [
-  {path: '', component: LoginComponent},
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'user/:uid', component: ProfileComponent},

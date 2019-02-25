@@ -64,7 +64,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var appRoutes = [
-    { path: '', component: _components_user_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'login', component: _components_user_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] },
     { path: 'register', component: _components_user_register_register_component__WEBPACK_IMPORTED_MODULE_5__["RegisterComponent"] },
     { path: 'user/:uid', component: _components_user_profile_profile_component__WEBPACK_IMPORTED_MODULE_4__["ProfileComponent"] },
@@ -113,7 +113,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <h1>\n    Welcome to {{title}}!\n  </h1>\n</div>\n\n\n  <router-outlet>\n    <div class=\"container\">\n      <ul><a routerLink=\"/login\">                login               </a></ul>\n      <!--<ul><a routerLink=\"/register\">             register             </a></ul>-->\n      <!--<ul><a routerLink=\"/user/123/website\">          WebSiteList               </a></ul>-->\n      <!--<ul><a routerLink=\"/user/123/website/new\">          WebsiteNewComponent               </a></ul>-->\n      <!--<ul><a routerLink=\"/user/123/website/111\">          WebsiteComponentWithId              </a></ul>-->\n      <!--<ul><a routerLink=\"/user/123/website/111/edit\">          WebSiteEdit               </a></ul>-->\n      <!--<ul><a routerLink=\"/user/123/website/111/page\">          PageListComponent               </a></ul>-->\n      <!--<ul><a routerLink=\"/user/123/website/111/page/new\">          PageNewComponent               </a></ul>-->\n      <!--<ul><a routerLink=\"/user/123/website/111/page/100\">          PageEditComponent               </a></ul>-->\n      <!--<ul><a routerLink=\"/user/123/website/111/page/100/widget\">          WidgetListComponent               </a></ul>-->\n      <!--<ul><a routerLink=\"/user/123/website/111/page/100/widget/new\">          WidgetChooserComponent               </a></ul>-->\n      <!--<ul><a routerLink=\"/user/123/website/111/page/100/widget/123\">          WidgetEditComponentWithId              </a></ul>-->\n    </div>\n  </router-outlet>\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <h1>\n    Welcome to {{title}}!\n  </h1>\n</div>\n\n\n  <router-outlet>\n    <!--<div class=\"container\">-->\n      <!--<ul><a routerLink=\"/login\">                login               </a></ul>-->\n      <!--&lt;!&ndash;<ul><a routerLink=\"/register\">             register             </a></ul>&ndash;&gt;-->\n      <!--&lt;!&ndash;<ul><a routerLink=\"/user/123/website\">          WebSiteList               </a></ul>&ndash;&gt;-->\n      <!--&lt;!&ndash;<ul><a routerLink=\"/user/123/website/new\">          WebsiteNewComponent               </a></ul>&ndash;&gt;-->\n      <!--&lt;!&ndash;<ul><a routerLink=\"/user/123/website/111\">          WebsiteComponentWithId              </a></ul>&ndash;&gt;-->\n      <!--&lt;!&ndash;<ul><a routerLink=\"/user/123/website/111/edit\">          WebSiteEdit               </a></ul>&ndash;&gt;-->\n      <!--&lt;!&ndash;<ul><a routerLink=\"/user/123/website/111/page\">          PageListComponent               </a></ul>&ndash;&gt;-->\n      <!--&lt;!&ndash;<ul><a routerLink=\"/user/123/website/111/page/new\">          PageNewComponent               </a></ul>&ndash;&gt;-->\n      <!--&lt;!&ndash;<ul><a routerLink=\"/user/123/website/111/page/100\">          PageEditComponent               </a></ul>&ndash;&gt;-->\n      <!--&lt;!&ndash;<ul><a routerLink=\"/user/123/website/111/page/100/widget\">          WidgetListComponent               </a></ul>&ndash;&gt;-->\n      <!--&lt;!&ndash;<ul><a routerLink=\"/user/123/website/111/page/100/widget/new\">          WidgetChooserComponent               </a></ul>&ndash;&gt;-->\n      <!--&lt;!&ndash;<ul><a routerLink=\"/user/123/website/111/page/100/widget/123\">          WidgetEditComponentWithId              </a></ul>&ndash;&gt;-->\n    <!--</div>-->\n  </router-outlet>\n"
 
 /***/ }),
 
@@ -1924,7 +1924,7 @@ var WidgetService = /** @class */ (function () {
             { _id: "345", widgetType: "IMAGE", pageId: "321", size: "unknown", text: "unknown", url: "http://lorempixel.com/400/200/", width: "100%" },
             //{_id: "456", widgetType: "HTML", pageId: "321", text: "<p>Lorem ipsum</p>"},
             { _id: "567", widgetType: "HEADING", pageId: "321", size: "4", text: "Lorem ipsum", url: "url", width: "100%" },
-            { _id: "678", widgetType: "YOUTUBE", pageId: "321", size: "unknown", text: "unknown", url: "https://youtu.be/AM2Ivdi9c4E", width: "100%" },
+            { _id: "678", widgetType: "YOUTUBE", pageId: "321", size: "unknown", text: "unknown", url: "https://www.youtube.com/embed/WrDGpMGF1pk", width: "100%" },
         ];
         this.api = {
             'createWidget': this.createWidget,
