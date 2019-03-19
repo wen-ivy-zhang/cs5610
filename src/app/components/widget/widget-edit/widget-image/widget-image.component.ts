@@ -3,6 +3,7 @@ import {WidgetService} from '../../../../services/widget.service.client';
 import {Widget} from '../../../../models/widget.model.client';
 import {Router, ActivatedRoute} from '@angular/router';
 import {NgForm} from '@angular/forms';
+import {environment} from '../../../../../environments/environment';
 
 
 @Component({
@@ -18,8 +19,9 @@ export class WidgetImageComponent implements OnInit {
   websiteId : string;
   pageId: string;
   widgetId: string;
-  widget: Widget;
-  uploadUrl: string = "No File Chosen";
+  widget: Widget = new Widget('000', '', '', '', '', '', '');
+  //uploadUrl: string = "No File Chosen";
+  baseUrl: string = environment.baseUrl;
 
   constructor(private widgetService: WidgetService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -37,30 +39,45 @@ export class WidgetImageComponent implements OnInit {
     console.log('image web id: ' + this.websiteId);
     console.log('image page id: ' + this.pageId);
     console.log('image widget id: ' + this.widgetId);
-    this.widget = this.widgetService.findWidgetById(this.widgetId);
-    console.log('Got widget');
+    this.widgetService.findWidgetById(this.widgetId).subscribe(
+      (data: Widget) => {
+        this.widget = data;
+        console.log('Got widget, type' + this.widget.widgetType);
+        console.log('Got widget, type' + this.widget.url);
+      },
+      (error: any) => {
+        console.log('Can not find widget.');
+      }
+    );
   }
 
   updateImage(){
     console.log('entering update image');
-    this.widget = this.widgetService.updateWidget(this.widgetId, this.widget);
-    console.log('exiting update image');
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+    console.log('widget url' + this.widget.url);
+    this.widgetService.updateWidget(this.widgetId, this.widget).subscribe(
+      (data: Widget) => {
+        this.widget = data;
+        console.log('exiting update image');
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+      },
+      (error: any) => {
+        console.log('Update Image failed');
+      }
+    );
   }
 
   deleteImage(){
     console.log('entering delete image');
-    this.widgetService.deleteWidget(this.widgetId);
-    console.log('exiting delete image');
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
-  }
-
-  uploadImage(){
-    console.log('entering upload image');
-    this.widget.url = this.uploadUrl;
-    this.widget = this.widgetService.updateWidget(this.widgetId, this.widget);
-    console.log('exiting upload image');
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', this.widgetId]);
+    this.widgetService.deleteWidget(this.widgetId).subscribe(
+      (data: Widget) => {
+        this.widget = data;
+        console.log('exiting delete image');
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+      },
+      (error: any) => {
+        console.log('Delete Image failed');
+      }
+    );
   }
 
 }

@@ -15,7 +15,7 @@ export class PageEditComponent implements OnInit {
   userId: string;
   websiteId : string;
   pageId: string;
-  page: Page;
+  page: Page = new Page('','','','');
 
   constructor(private pageService: PageService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -31,22 +31,37 @@ export class PageEditComponent implements OnInit {
     console.log('user id: ' + this.userId);
     console.log('web id: ' + this.websiteId);
     console.log('page id: ' + this.pageId);
-    this.page = this.pageService.findPageById(this.pageId);
-    console.log('Got Page');
+   this.pageService.findPageById(this.pageId).subscribe(
+     (data:Page) => {
+       this.page = data;
+       console.log('Got Page');
+     }
+   );
+
   }
 
   updatePage(){
     console.log('entering update page');
-    this.page = this.pageService.updatePage(this.pageId, this.page);
-    console.log('exiting update page');
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+    this.pageService.updatePage(this.pageId, this.page).subscribe(
+      (data:Page) => {
+        this.page = data;
+        console.log('exiting update page');
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+      }
+    );
+
   }
 
   deletePage(){
     console.log('entering delete page');
-    this.pageService.deletePage(this.pageId);
-    console.log('exiting delete page');
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+    this.pageService.deletePage(this.pageId).subscribe(
+      (data:Page) => {
+        this.page = data;
+        console.log('exiting delete page');
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+      }
+    );
+
   }
 
 }

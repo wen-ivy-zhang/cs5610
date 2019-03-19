@@ -17,7 +17,7 @@ export class WidgetYoutubeComponent implements OnInit {
   websiteId : string;
   pageId: string;
   widgetId: string;
-  widget: Widget;
+  widget: Widget = new Widget('000', '', '', '', '', '', '');
 
   constructor(private widgetService: WidgetService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -35,22 +35,43 @@ export class WidgetYoutubeComponent implements OnInit {
     console.log('youtube web id: ' + this.websiteId);
     console.log('youtube page id: ' + this.pageId);
     console.log('youtube widget id: ' + this.widgetId);
-    this.widget = this.widgetService.findWidgetById(this.widgetId);
-    console.log('Got widget');
+    this.widgetService.findWidgetById(this.widgetId).subscribe(
+      (data: Widget) => {
+        this.widget = data;
+        console.log('Got widget, type' + this.widget.widgetType);
+      },
+      (error: any) => {
+        console.log('Can not find widget.');
+      }
+    );
   }
 
   updateYoutube(){
     console.log('entering update youtube');
-    this.widget = this.widgetService.updateWidget(this.widgetId, this.widget);
-    console.log('exiting update youtube');
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+    this.widgetService.updateWidget(this.widgetId, this.widget).subscribe(
+      (data: Widget) => {
+        this.widget = data;
+        console.log('exiting update youtube');
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+      },
+      (error: any) => {
+        console.log('Update Youtube failed');
+      }
+    );
   }
 
   deleteYoutube(){
     console.log('entering delete youtube');
-    this.widgetService.deleteWidget(this.widgetId);
-    console.log('exiting delete youtube');
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+    this.widgetService.deleteWidget(this.widgetId).subscribe(
+      (data: Widget) => {
+        this.widget = data;
+        console.log('exiting delete youtube');
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+      },
+      (error: any) => {
+        console.log('Delete Youtube failed');
+      }
+    );
   }
 
 }

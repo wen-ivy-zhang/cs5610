@@ -14,9 +14,9 @@ export class PageNewComponent implements OnInit {
   @ViewChild('newpage') myNewPageFrom: NgForm;
   userId: string;
   websiteId: string;
-  page: Page;
+  page: Page = new Page('','','','');
 
-  // errorFlag: boolean;
+  errorFlag: boolean;
   // errorMsg = 'Registration failed!';
 
   constructor(private pageService: PageService, private router: Router, private activatedRoute: ActivatedRoute) {
@@ -38,17 +38,23 @@ export class PageNewComponent implements OnInit {
     console.log(this.myNewPageFrom.value.pagename);
     console.log(this.myNewPageFrom.value.pagetitle);
 
-    this.page = this.pageService.createPage(
+    this.pageService.createPage(
       this.websiteId,
       new Page('000', this.myNewPageFrom.value.pagename, this.websiteId, this.myNewPageFrom.value.pagetitle)
+    ).subscribe(
+      (data: Page) => {
+        this.page = data;
+        console.log("check page id: ", this.page._id);
+        console.log("check page name: ", this.page.name);
+        if (this.page) {
+          this.errorFlag = false;
+          this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+        }
+      },
+      (error: any) => {
+        this.errorFlag = true;
+      }
     );
-    console.log("check page id: ", this.page._id);
-    console.log("check page name: ", this.page.name);
-    if (this.page) {
-      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
-    }
-    // else{
-    //   this.errorFlag = true;
-    // }
   }
+
 }

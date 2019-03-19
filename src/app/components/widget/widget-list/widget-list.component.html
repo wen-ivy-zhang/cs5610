@@ -1,5 +1,3 @@
-
-
 <nav class="navbar navbar-expand-md navbar-light bg-light">
   <ul class="navbar-nav">
     <li class="nav-item active col-1">
@@ -23,22 +21,51 @@
 
 
 <div class="container-fluid cl-container-padding">
-  <ul class="list-group cl-list-group-borderless">
-    <div *ngFor = "let widget of widgets">
+  <div class="widget-list" appSortable (newIndexes)="reorderWidgets($event)">
+  <!--<ul class="list-group cl-list-group-borderless">-->
+    <div *ngFor = "let widget of widgets | orderBy">
       <div [ngSwitch]="widget.widgetType">
+        <div class="jga-widget">
+
+          <div class="jga-widget-tool">
+            <a [routerLink]="['/user', 'website', websiteId, 'page', pageId, 'widget', widget._id]">
+              <span class="glyphicon glyphicon-cog"> </span>
+            </a>
+            <span class="glyphicon glyphicon-align-justify"></span>
+          </div>
 
         <div *ngSwitchCase="'HEADING'">
-          <li class="list-group-item cl-list-item-borderless">
+          <!--<li class="list-group-item cl-list-item-borderless">-->
             <!--<a routerLink ="widget-heading.html" class="navbar-link float-right">-->
             <a routerLink = '/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}' class="navbar-link float-right">
               <i class="fas fa-cog fontawsome_icon" style="background-color: white"></i>
             </a>
-            <h2>{{widget.text}}</h2>
-          </li>
+            <!--<h2>{{widget.text}}</h2>-->
+            <div [ngSwitch]="widget['size']">
+              <div *ngSwitchCase="1">
+                <h1>{{ widget['text'] }}</h1>
+              </div>
+              <div *ngSwitchCase="2">
+                <h2>{{ widget['text'] }}</h2>
+              </div>
+              <div *ngSwitchCase="3">
+                <h3>{{ widget['text'] }}</h3>
+              </div>
+              <div *ngSwitchCase="4">
+                <h4>{{ widget['text'] }}</h4>
+              </div>
+              <div *ngSwitchCase="5">
+                <h5>{{ widget['text'] }}</h5>
+              </div>
+              <div *ngSwitchCase="6">
+                <h6>{{ widget['text'] }}</h6>
+              </div>
+            </div>
+          <!--</li>-->
         </div>
 
         <div *ngSwitchCase="'YOUTUBE'">
-          <li class="list-group-item cl-list-item-borderless">
+          <!--<li class="list-group-item cl-list-item-borderless">-->
             <!--<a href="widget-youtube.html" class="navbar-link float-right">-->
             <a routerLink = '/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}' class="navbar-link float-right">
             <i class="fas fa-cog fontawsome_icon" style="background-color: white"></i>
@@ -49,11 +76,11 @@
               <iframe width="500" height="315" [src]='sanitizer.bypassSecurityTrustResourceUrl(widget.url)' frameborder="0"
                       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture allowfullscreen" ></iframe>
             </div>
-          </li>
+          <!--</li>-->
         </div>
 
         <div *ngSwitchCase="'IMAGE'">
-          <li class="list-group-item cl-list-item-borderless">
+          <!--<li class="list-group-item cl-list-item-borderless">-->
             <div>
               <!--<a href="widget-image.html" class="navbar-link float-right">-->
               <a routerLink = '/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/{{widget._id}}' class="navbar-link float-right">
@@ -64,21 +91,14 @@
               <img class="img-responsive img-rounded cl-widget-images"
                    src="{{widget.url}}">
             </div>
-          </li>
-        </div>
-
-        <!--<div *ngSwitchCase="'HTML'">-->
-          <!--<li class="list-group-item cl-list-item-borderless">-->
-            <!--<a href="widget-heading.html" class="navbar-link float-right">-->
-              <!--<i class="fas fa-cog fontawsome_icon" style="background-color: white"></i>-->
-            <!--</a>-->
-            <!--<h2>Another winter storm to bring snow, cold across Seattle, northwestern US at late week</h2>-->
           <!--</li>-->
-        <!--</div>-->
+        </div>
 
       </div>
     </div>
-  </ul>
+    </div>
+  <!--</ul>-->
+  </div>
 </div>
 
 
@@ -104,4 +124,3 @@
     </li>
   </ul>
 </nav>
-

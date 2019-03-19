@@ -14,7 +14,7 @@ export class WidgetEditComponent implements OnInit {
   websiteId: string;
   pageId: string;
   widgetId: string;
-  widget: any;
+  widget: Widget = new Widget('000', '', '', '', '', '', '');
 
   constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute) { }
 
@@ -32,8 +32,17 @@ export class WidgetEditComponent implements OnInit {
     console.log('website id: ' + this.websiteId);
     console.log('page id: ' + this.pageId);
     console.log('widget id: ' + this.widgetId);
-    this.widget = this.widgetService.findWidgetById(this.widgetId);
-    console.log('widget type: ' + this.widget.widgetType);
+
+    this.widgetService.findWidgetById(this.widgetId).subscribe(
+      (data: Widget) => {
+        this.widget = data;
+        console.log('widget type: ' + this.widget.widgetType);
+      },
+      (error: any) => {
+        console.log('Can not find widget.');
+      }
+    );
+
   }
 }
 

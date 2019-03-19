@@ -24,26 +24,30 @@ export class RegisterComponent implements OnInit {
   }
 
   register(){
-    //this.user = new User(this.myRegisterFrom.value.username, this.myRegisterFrom.value.password);
-
     console.log(this.myRegisterFrom.value.username);
     console.log(this.myRegisterFrom.value.password);
 
-    this.user = this.userService.createUser(
+    this.userService.createUser(
       new User('000',
         this.myRegisterFrom.value.username,
         this.myRegisterFrom.value.password,
         'empty',
         'empty',
-        'empty')
+        'empty'))
+      .subscribe(
+      (data: User) => {
+        this.user = data;
+        console.log("checkpoint this.userId: ", this.user._id);
+        console.log("checkpoint this.username: ", this.user.username);
+        if (this.user) {
+          this.errorFlag = false;
+          this.router.navigate(['/user', this.user._id]);
+        }
+      },
+      (error: any) => {
+        this.errorFlag = true;
+      }
     );
-    console.log("checkpoint this.userId: ", this.user._id);
-    console.log("checkpoint this.username: ", this.user.username);
-    if (this.user) {
-      this.router.navigate(['/user', this.user._id]);
-    }
-    else{
-      this.errorFlag = true;
-    }
   }
+
 }

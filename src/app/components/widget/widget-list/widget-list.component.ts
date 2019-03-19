@@ -18,6 +18,19 @@ export class WidgetListComponent implements OnInit {
 
   constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, public sanitizer: DomSanitizer) { }
 
+  // receiving the emitted event
+  reorderWidgets(indexes) {
+    console.log('enter reorderWidgets, widget list');
+    // call widget service function to update widget as per index
+    this.widgetService.reorderWidgets(indexes.startIndex, indexes.endIndex, this.pageId)
+      .subscribe(
+        (data: any) => {
+          console.log(data);
+          this.widgets = data;
+        }
+      );
+  }
+
   ngOnInit() {
     this.activatedRoute.params.subscribe(
       (params: any) => {
@@ -30,8 +43,14 @@ export class WidgetListComponent implements OnInit {
     console.log('user id: ' + this.userId);
     console.log('website id: ' + this.websiteId);
     console.log('page id: ' + this.pageId);
-    this.widgets = this.widgetService.findWidgetsByPageId(this.pageId);
-    console.log('Got widgets');
+    //this.widgets = this.widgetService.findWidgetsByPageId(this.pageId);
+    this.widgetService.findWidgetsByPageId(this.pageId).subscribe(
+      (data: Widget[]) => {
+        this.widgets = data;
+        console.log('Got widgets:');
+        console.log(data);
+      }
+    );
   }
-}
 
+}

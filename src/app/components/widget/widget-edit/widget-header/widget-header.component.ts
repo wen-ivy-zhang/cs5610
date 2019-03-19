@@ -17,7 +17,7 @@ export class WidgetHeaderComponent implements OnInit {
   websiteId : string;
   pageId: string;
   widgetId: string;
-  widget: Widget;
+  widget: Widget = new Widget('000', '', '', '', '', '', '');
 
   constructor(private widgetService: WidgetService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -35,22 +35,44 @@ export class WidgetHeaderComponent implements OnInit {
     console.log('header web id: ' + this.websiteId);
     console.log('header page id: ' + this.pageId);
     console.log('header widget id: ' + this.widgetId);
-    this.widget = this.widgetService.findWidgetById(this.widgetId);
-    console.log('Got widget');
+    this.widgetService.findWidgetById(this.widgetId).subscribe(
+      (data: Widget) => {
+        this.widget = data;
+        console.log('Got widget, type' + this.widget.widgetType);
+      },
+      (error: any) => {
+        console.log('Can not find widget.');
+      }
+    );
+
   }
 
   updateHeading(){
     console.log('entering update heading');
-    this.widget = this.widgetService.updateWidget(this.widgetId, this.widget);
-    console.log('exiting update heading');
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+    this.widgetService.updateWidget(this.widgetId, this.widget).subscribe(
+      (data: Widget) => {
+        this.widget = data;
+        console.log('exiting update heading');
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+      },
+      (error: any) => {
+        console.log('Update Heading failed');
+      }
+    );
   }
 
   deleteHeading(){
     console.log('entering delete heading');
-    this.widgetService.deleteWidget(this.widgetId);
-    console.log('exiting delete heading');
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+    this.widgetService.deleteWidget(this.widgetId).subscribe(
+      (data: Widget) => {
+        this.widget = data;
+        console.log('exiting delete heading');
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+      },
+      (error: any) => {
+        console.log('Delete Heading failed');
+      }
+    );
   }
 
 }

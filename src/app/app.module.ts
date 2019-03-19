@@ -2,10 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import{UserService} from './services/user.service.client';
-import{WebsiteService} from './services/website.service.client';
-import{PageService} from './services/page.service.client';
-import{WidgetService} from './services/widget.service.client';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
+
+import{ UserService } from './services/user.service.client';
+import{ WebsiteService } from './services/website.service.client';
+import{ PageService } from './services/page.service.client';
+import{ WidgetService } from './services/widget.service.client';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/user/login/login.component';
@@ -23,6 +26,9 @@ import { PageNewComponent } from './components/page/page-new/page-new.component'
 import { WidgetHeaderComponent } from './components/widget/widget-edit/widget-header/widget-header.component';
 import { WidgetImageComponent } from './components/widget/widget-edit/widget-image/widget-image.component';
 import { WidgetYoutubeComponent } from './components/widget/widget-edit/widget-youtube/widget-youtube.component';
+import { SortableDirective } from './components/widget/widget-list/sortable.directive';
+import { SafePipe } from './components/widget/widget-list/safe-pipe.pipe';
+import { OrderByPipe } from './components/widget/widget-list/order-by-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -41,14 +47,19 @@ import { WidgetYoutubeComponent } from './components/widget/widget-edit/widget-y
     PageNewComponent,
     WidgetHeaderComponent,
     WidgetImageComponent,
-    WidgetYoutubeComponent
+    WidgetYoutubeComponent,
+    SortableDirective,
+    OrderByPipe,
+    SafePipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
+    HttpModule,
     AppRoutingModule,
   ],
-  providers: [UserService, WebsiteService, PageService,WidgetService],
+  providers: [UserService, WebsiteService, PageService, WidgetService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

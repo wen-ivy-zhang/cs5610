@@ -5,12 +5,12 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {NgForm} from '@angular/forms';
 
 
-
 @Component({
   selector: 'app-widget-chooser',
   templateUrl: './widget-chooser.component.html',
   styleUrls: ['./widget-chooser.component.css']
 })
+
 export class WidgetChooserComponent implements OnInit {
   //@ViewChild('newpage') myNewPageFrom: NgForm;
   @ViewChild('h') headingFrom: NgForm;
@@ -47,15 +47,18 @@ export class WidgetChooserComponent implements OnInit {
     const newWidget : Widget = {
       _id:'', widgetType: widgetType, pageId:'100', size:'1',text:'text',url:'url',width:'100%'
     }
-    this.widgetService.createWidget(this.pageId, newWidget);
+    this.widgetService.createWidget(this.pageId, newWidget).subscribe(
+      (data: Widget) => {
+        this.widget = data;
+        console.log('new widget id ' + this.widget._id);
+        console.log('new widget page id: ' + this.widget.pageId);
+        console.log('new widget type: ' + this.widget.widgetType);
 
-    console.log('new widget user id: ' + this.userId);
-    console.log('new widget web id: ' + this.websiteId);
-    console.log('new widget page id: ' + this.pageId);
-    console.log('newWidget ID ' + newWidget._id);
-
-    const url: any = '/user/' + this.userId + '/website/' + this.websiteId + '/page/' + this.pageId + '/widget/' + newWidget._id;
-    console.log('url:' + url);
-    this.router.navigate([url]);
+        const url: any = '/user/' + this.userId + '/website/' + this.websiteId + '/page/' + this.pageId + '/widget/' + this.widget._id;
+        console.log('url:' + url);
+        this.router.navigate([url]);
+      }
+    );
   }
+
 }

@@ -14,8 +14,9 @@ export class ProfileComponent implements OnInit {
   @ViewChild('f') myloginForm:NgForm;
   //properties
   userId: string;
-  user: User;
+  user: User = new User('000', '', '', '', '', '');
   username: string;
+  errorFlag : boolean;
 
   constructor(private userService: UserService, private router: ActivatedRoute) { }
 
@@ -23,7 +24,17 @@ export class ProfileComponent implements OnInit {
     console.log(this.user.username);
     console.log(this.user.firstName);
     console.log(this.user.lastName);
-    this.userService.updateUser(this.userId, this.user);
+    //this.userService.updateUser(this.userId, this.user);
+
+    this.userService.updateUser(this.userId, this.user)
+      .subscribe(
+        (data: User) => {
+          this.user = data;
+        },
+        (error: any) => {
+          this.errorFlag = true;
+        }
+      );
   }
 
   ngOnInit() {
@@ -32,8 +43,17 @@ export class ProfileComponent implements OnInit {
       console.log('user id: ' + this.userId);
     });
 
-    this.user = this.userService.findUserById(this.userId);
-    console.log('profile check: username:' + this.user.username);
-    this.username = this.user['username'];
+    //this.user = this.userService.findUserById(this.userId)
+    this.userService.findUserById(this.userId)
+      .subscribe(
+        (data: User) => {
+          this.user = data;
+          console.log('profile check: username:' + this.user.username);
+          this.username = this.user['username'];
+        },
+        (error: any) => {
+          this.errorFlag = true;
+        }
+      );
   }
 }

@@ -29,17 +29,14 @@ app.set('port', port);
 const server = http.createServer(app);
 server.listen( port , () => console.log('Running on port 3200'));
 
+require("./server/app.js")(app);
 
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
-// app.get('*', function (req, res) {
-//   res.sendFile(path.join(__dirname, 'dist/index.html'));
-// });
 
 
-//require('./assignment/app')(app);
 
 
 

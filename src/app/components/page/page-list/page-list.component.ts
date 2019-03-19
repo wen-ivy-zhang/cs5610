@@ -26,8 +26,12 @@ export class PageListComponent implements OnInit {
 
     console.log('website id: ' + this.websiteId);
     console.log('user id: ' + this.userId);
-    this.pages = this.pageService.findPagesByWebsiteId(this.websiteId);
-    console.log('Got pages');
+    this.pageService.findPagesByWebsiteId(this.websiteId).subscribe(
+      (data: Page[]) => {
+        this.pages = data;
+        console.log('Got pages');
+      }
+    );
   }
 }
 
