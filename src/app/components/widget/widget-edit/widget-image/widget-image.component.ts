@@ -19,7 +19,7 @@ export class WidgetImageComponent implements OnInit {
   websiteId : string;
   pageId: string;
   widgetId: string;
-  widget: Widget = new Widget('000', '', '', '', '', '', '');
+  widget: Widget = new Widget('', '', '', '', '', '', '', '', '', false);
   //uploadUrl: string = "No File Chosen";
   baseUrl: string = environment.baseUrl;
 
@@ -40,7 +40,7 @@ export class WidgetImageComponent implements OnInit {
     console.log('image page id: ' + this.pageId);
     console.log('image widget id: ' + this.widgetId);
     this.widgetService.findWidgetById(this.widgetId).subscribe(
-      (data: Widget) => {
+      (data: any) => {
         this.widget = data;
         console.log('Got widget, type' + this.widget.widgetType);
         console.log('Got widget, type' + this.widget.url);
@@ -55,7 +55,7 @@ export class WidgetImageComponent implements OnInit {
     console.log('entering update image');
     console.log('widget url' + this.widget.url);
     this.widgetService.updateWidget(this.widgetId, this.widget).subscribe(
-      (data: Widget) => {
+      (data: any) => {
         this.widget = data;
         console.log('exiting update image');
         this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
@@ -69,7 +69,7 @@ export class WidgetImageComponent implements OnInit {
   deleteImage(){
     console.log('entering delete image');
     this.widgetService.deleteWidget(this.widgetId).subscribe(
-      (data: Widget) => {
+      (data: any) => {
         this.widget = data;
         console.log('exiting delete image');
         this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);

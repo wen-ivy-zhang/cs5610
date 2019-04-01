@@ -32,7 +32,7 @@ export class WebsiteNewComponent implements OnInit {
     // this.websites = this.websiteService.findWebsitesByUser(this.userId);
     this.websiteService.findWebsitesByUser(this.userId)
       .subscribe(
-        (data: Website[]) => {
+        (data: any) => {
           this.websites = data;
           console.log('new web Got websites');
         }
@@ -49,12 +49,13 @@ export class WebsiteNewComponent implements OnInit {
     // );
     this.websiteService.createWebsite(
       this.userId,
-      new Website('000', this.myNewWebFrom.value.webname, this.userId, this.myNewWebFrom.value.description)
+      new Website(this.myNewWebFrom.value.webname, this.userId, this.myNewWebFrom.value.description)
     ).subscribe(
-      (data: Website) => {
+      (data: any) => {
         this.website = data;
         console.log("checkpoint this.website Id: ", this.website._id);
         console.log("checkpoint this.website Name: ", this.website.name);
+        console.log("checkpoint this.website developerId: ", this.website.developerId);
         if (this.website) {
           this.errorFlag = false;
           this.router.navigate(['/user', this.userId, 'website']);

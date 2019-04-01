@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     //this.user = this.userService.findUserByCredential(this.username, this.password);
     this.userService.findUserByCredential(this.username, this.password)
       .subscribe(
-        (data: User) => {
+        (data: any) => {
           this.user = data;
           if (this.user) {
             console.log("login this.userId: ", this.user._id);

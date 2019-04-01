@@ -44,11 +44,13 @@ export class WidgetChooserComponent implements OnInit {
 
   createWidget(widgetType: string){
     console.log('entering  createWidget');
-    const newWidget : Widget = {
-      _id:'', widgetType: widgetType, pageId:'100', size:'1',text:'text',url:'url',width:'100%'
-    }
+    // const newWidget : Widget = {
+    //   widgetType: widgetType, pageId:'100', size:'1',text:'text',url:'url',width:'100%'
+    // }
+    let newWidget = new Widget('name', widgetType, '100', '1', 'text', '100%', 'url',
+      '1', 'placeholder', false);
     this.widgetService.createWidget(this.pageId, newWidget).subscribe(
-      (data: Widget) => {
+      (data: any) => {
         this.widget = data;
         console.log('new widget id ' + this.widget._id);
         console.log('new widget page id: ' + this.widget.pageId);

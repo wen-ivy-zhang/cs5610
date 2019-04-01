@@ -29,6 +29,22 @@ app.set('port', port);
 const server = http.createServer(app);
 server.listen( port , () => console.log('Running on port 3200'));
 
+
+//var connectionString = 'mongodb://127.0.0.1:27017/webdev'; //local DB
+var connectionString = 'mongodb://wenzhang:wenzhang1124@ds117251.mlab.com:17251/heroku_lcx4662p'; //heroku DB
+
+
+var mongoose = require("mongoose");
+mongoose.Promise = global.Promise;
+const client = mongoose.connect( connectionString, { useNewUrlParser: true });
+
+//Get the default connection
+var db = mongoose.connection;
+//Bind connection to error event (to get notification of connection errors)
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+
+
 require("./server/app.js")(app);
 
 app.get('*', function (req, res) {

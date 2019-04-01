@@ -8,7 +8,7 @@
   <form (ngSubmit)="register()" #f ="ngForm">
     <input type="text" name="username" class="form-control" placeholder="username" ngModel required #username="ngModel"/>
     <input type="text" name="password" class="form-control" placeholder="password" ngModel required #password="ngModel"/>
-    <input type="text" name="password" class="form-control" placeholder="verify password"/>
+    <input type="text" name="vpassword" class="form-control" placeholder="verify password" ngModel required #vpassword="ngModel"/>
     <!--<a class="btn btn-primary btn-block" href="profile.html">Register</a>-->
     <button class = "btn btn-primary btn-block" type = "submit" [disabled]="!f.valid">Register</button>
     <a class="btn btn-danger  btn-block" routerLink ='/login'>Cancel</a>

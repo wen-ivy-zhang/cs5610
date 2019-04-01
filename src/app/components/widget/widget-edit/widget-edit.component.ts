@@ -14,7 +14,7 @@ export class WidgetEditComponent implements OnInit {
   websiteId: string;
   pageId: string;
   widgetId: string;
-  widget: Widget = new Widget('000', '', '', '', '', '', '');
+  widget: Widget = new Widget('', '', '', '', '', '', '', '', '', false);
 
   constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute) { }
 
@@ -34,7 +34,7 @@ export class WidgetEditComponent implements OnInit {
     console.log('widget id: ' + this.widgetId);
 
     this.widgetService.findWidgetById(this.widgetId).subscribe(
-      (data: Widget) => {
+      (data: any) => {
         this.widget = data;
         console.log('widget type: ' + this.widget.widgetType);
       },

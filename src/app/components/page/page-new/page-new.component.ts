@@ -14,7 +14,7 @@ export class PageNewComponent implements OnInit {
   @ViewChild('newpage') myNewPageFrom: NgForm;
   userId: string;
   websiteId: string;
-  page: Page = new Page('','','','');
+  page: Page = new Page('','', '');
 
   errorFlag: boolean;
   // errorMsg = 'Registration failed!';
@@ -40,9 +40,9 @@ export class PageNewComponent implements OnInit {
 
     this.pageService.createPage(
       this.websiteId,
-      new Page('000', this.myNewPageFrom.value.pagename, this.websiteId, this.myNewPageFrom.value.pagetitle)
+      new Page(this.myNewPageFrom.value.pagename, this.websiteId, this.myNewPageFrom.value.pagetitle)
     ).subscribe(
-      (data: Page) => {
+      (data: any) => {
         this.page = data;
         console.log("check page id: ", this.page._id);
         console.log("check page name: ", this.page.name);

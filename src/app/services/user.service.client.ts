@@ -22,7 +22,12 @@ export class UserService {
     'deleteUser' : this.deleteUser
   };
 
-  createUser(user: User) {
+  //createUser(user: User) {
+  createUser(username: string, password: string) {
+    const user = {
+      username : username,
+      password : password
+    };
     return this.http.post(this.baseUrl + '/api/user/', user);
   }
 

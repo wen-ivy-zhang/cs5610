@@ -17,7 +17,7 @@ export class WidgetHeaderComponent implements OnInit {
   websiteId : string;
   pageId: string;
   widgetId: string;
-  widget: Widget = new Widget('000', '', '', '', '', '', '');
+  widget: Widget = new Widget('', '', '', '', '', '', '', '', '', false);
 
   constructor(private widgetService: WidgetService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -36,7 +36,7 @@ export class WidgetHeaderComponent implements OnInit {
     console.log('header page id: ' + this.pageId);
     console.log('header widget id: ' + this.widgetId);
     this.widgetService.findWidgetById(this.widgetId).subscribe(
-      (data: Widget) => {
+      (data: any) => {
         this.widget = data;
         console.log('Got widget, type' + this.widget.widgetType);
       },
@@ -50,7 +50,7 @@ export class WidgetHeaderComponent implements OnInit {
   updateHeading(){
     console.log('entering update heading');
     this.widgetService.updateWidget(this.widgetId, this.widget).subscribe(
-      (data: Widget) => {
+      (data: any) => {
         this.widget = data;
         console.log('exiting update heading');
         this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
@@ -64,7 +64,7 @@ export class WidgetHeaderComponent implements OnInit {
   deleteHeading(){
     console.log('entering delete heading');
     this.widgetService.deleteWidget(this.widgetId).subscribe(
-      (data: Widget) => {
+      (data: any) => {
         this.widget = data;
         console.log('exiting delete heading');
         this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);

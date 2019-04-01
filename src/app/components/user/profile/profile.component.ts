@@ -14,7 +14,8 @@ export class ProfileComponent implements OnInit {
   @ViewChild('f') myloginForm:NgForm;
   //properties
   userId: string;
-  user: User = new User('000', '', '', '', '', '');
+  user: User = new User('000', '', '', '', '', '', '');
+  //user: any
   username: string;
   errorFlag : boolean;
 
@@ -28,8 +29,11 @@ export class ProfileComponent implements OnInit {
 
     this.userService.updateUser(this.userId, this.user)
       .subscribe(
-        (data: User) => {
+        (data: any) => {
           this.user = data;
+          console.log("after update: " + this.user.username);
+          console.log("after update: " + this.user.firstName);
+          console.log("after update: " + this.user.lastName);
         },
         (error: any) => {
           this.errorFlag = true;
@@ -46,7 +50,7 @@ export class ProfileComponent implements OnInit {
     //this.user = this.userService.findUserById(this.userId)
     this.userService.findUserById(this.userId)
       .subscribe(
-        (data: User) => {
+        (data: any) => {
           this.user = data;
           console.log('profile check: username:' + this.user.username);
           this.username = this.user['username'];

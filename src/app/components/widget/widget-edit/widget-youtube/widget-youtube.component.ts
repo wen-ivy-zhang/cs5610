@@ -17,7 +17,7 @@ export class WidgetYoutubeComponent implements OnInit {
   websiteId : string;
   pageId: string;
   widgetId: string;
-  widget: Widget = new Widget('000', '', '', '', '', '', '');
+  widget: Widget = new Widget('', '', '', '', '', '', '', '', '', false);
 
   constructor(private widgetService: WidgetService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -36,7 +36,7 @@ export class WidgetYoutubeComponent implements OnInit {
     console.log('youtube page id: ' + this.pageId);
     console.log('youtube widget id: ' + this.widgetId);
     this.widgetService.findWidgetById(this.widgetId).subscribe(
-      (data: Widget) => {
+      (data: any) => {
         this.widget = data;
         console.log('Got widget, type' + this.widget.widgetType);
       },
@@ -49,7 +49,7 @@ export class WidgetYoutubeComponent implements OnInit {
   updateYoutube(){
     console.log('entering update youtube');
     this.widgetService.updateWidget(this.widgetId, this.widget).subscribe(
-      (data: Widget) => {
+      (data: any) => {
         this.widget = data;
         console.log('exiting update youtube');
         this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
@@ -63,7 +63,7 @@ export class WidgetYoutubeComponent implements OnInit {
   deleteYoutube(){
     console.log('entering delete youtube');
     this.widgetService.deleteWidget(this.widgetId).subscribe(
-      (data: Widget) => {
+      (data: any) => {
         this.widget = data;
         console.log('exiting delete youtube');
         this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);

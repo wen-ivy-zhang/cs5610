@@ -30,11 +30,13 @@
     </li>
 
     <li class="list-group-item cl-list-item-borderless">
-      <a routerLink = '/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new'>HTML</a>
+      <!--<a routerLink = '/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new'>HTML</a>-->
+      <a (click) = "createWidget('HTML')"> HTML </a>
     </li>
 
     <li class="list-group-item cl-list-item-borderless">
-      <a routerLink = '/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new'>Text Input</a>
+      <!--<a routerLink = '/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new'>Text Input</a>-->
+      <a (click) = "createWidget('TEXT')"> TEXT </a>
     </li>
 
     <li class="list-group-item cl-list-item-borderless">
