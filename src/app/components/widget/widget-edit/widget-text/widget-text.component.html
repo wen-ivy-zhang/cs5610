@@ -1,3 +1,8 @@
+
+<div *ngIf="errorFlag" class = "alert alert-danger">
+  {{errorMsg}}
+</div>
+
 <!--Header-->
 <form (ngSubmit)="updateText()" #updatetext ="ngForm">
   <nav class="navbar navbar-expand-md navbar-light bg-light">

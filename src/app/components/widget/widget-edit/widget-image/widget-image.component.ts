@@ -22,6 +22,8 @@ export class WidgetImageComponent implements OnInit {
   widget: Widget = new Widget('', '', '', '', '', '', '', '', '', false);
   //uploadUrl: string = "No File Chosen";
   baseUrl: string = environment.baseUrl;
+  errorFlag: boolean;
+  errorMsg = 'Widget name is required!';
 
   constructor(private widgetService: WidgetService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -54,6 +56,12 @@ export class WidgetImageComponent implements OnInit {
   updateImage(){
     console.log('entering update image');
     console.log('widget url' + this.widget.url);
+
+    if (!this.widget.name || this.widget.name.length === 0) {
+      this.errorFlag = true;
+      return;
+    }
+
     this.widgetService.updateWidget(this.widgetId, this.widget).subscribe(
       (data: any) => {
         this.widget = data;

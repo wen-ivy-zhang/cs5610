@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
+//import { AppRoutingModule } from './app-routing.module';
+import { routing } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { QuillEditorModule } from 'ngx-quill-editor';
@@ -34,6 +35,8 @@ import { WidgetHtmlComponent } from './components/widget/widget-edit/widget-html
 import { WidgetTextComponent } from './components/widget/widget-edit/widget-text/widget-text.component';
 import { FlickrImageSearchComponent } from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
 import { FlickrService } from './services/flickr.service.client';
+import { SharedService } from './services/shared.service';
+import { AuthGuard } from './services/auth-guard.service';
 
 
 @NgModule({
@@ -66,10 +69,10 @@ import { FlickrService } from './services/flickr.service.client';
     FormsModule,
     HttpClientModule,
     HttpModule,
-    AppRoutingModule,
+    routing,
     QuillEditorModule
   ],
-  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService],
+  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService, SharedService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

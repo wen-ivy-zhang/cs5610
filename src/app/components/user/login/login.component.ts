@@ -5,6 +5,7 @@ import {ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {User} from '../../../models/user.model.client';
 import {error} from 'selenium-webdriver';
+import {SharedService} from '../../../services/shared.service';
 
 
 @Component({
@@ -17,12 +18,12 @@ export class LoginComponent implements OnInit {
   @ViewChild('f') myloginFrom: NgForm;
   username: string;
   password: string;
-  user: User;
+  //user: User;
 
   errorFlag: boolean;
   errorMsg = 'Invalid username or password!';
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private userService: UserService, private router: Router, private sharedService: SharedService) {
   }
 
   ngOnInit() {
@@ -37,15 +38,18 @@ export class LoginComponent implements OnInit {
     console.log(this.password);
 
     //this.user = this.userService.findUserByCredential(this.username, this.password);
-    this.userService.findUserByCredential(this.username, this.password)
+    //this.userService.findUserByCredential(this.username, this.password)
+    this.userService.login(this.username, this.password)
       .subscribe(
         (data: any) => {
-          this.user = data;
-          if (this.user) {
-            console.log("login this.userId: ", this.user._id);
-            console.log("login this.username: ", this.user.username);
+          //this.user = data;
+          this.sharedService.user = data;
+          if (this.sharedService.user) {
+            console.log("login this.userId: ", this.sharedService.user['_id']);
+            console.log("login this.username: ", this.sharedService.user['username']);
             this.errorFlag = false;
-            this.router.navigate(['/user', this.user._id]);
+            //this.router.navigate(['/user', this.user._id]);
+            this.router.navigate(['/profile']);
           }
           else {
             this.errorFlag = true;

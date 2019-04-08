@@ -6,12 +6,28 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const app = express();
 
+var passport = require('passport');
+var cookieParser = require('cookie-parser');
+var session      = require('express-session');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Point static path to dist -- For building -- REMOVE
 app.use(express.static(path.join(__dirname, 'dist/my-project'))); // change to 'public'
 // app.use(express.static(path.join(__dirname, 'public')));ng1
+
+app.use(session({
+  secret: 'this is the secret',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(cookieParser());
+//app.use(session({ secret: process.env.SESSION_SECRET}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 // CORS
 app.use(function(req, res, next) {
@@ -48,7 +64,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 require("./server/app.js")(app);
 
 app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'dist/index.html'));
+  res.sendFile(path.join(__dirname, 'dist/my-project/index.html'));
 });
 
 

@@ -16,8 +16,10 @@ export class WebsiteEditComponent implements OnInit {
   @ViewChild('deleteweb') deleteWebFrom: NgForm;
   userId: string;
   websiteId : string;
-  website: Website = new Website('', '', '');
+  website: Website = new Website('Name', '', '');
   websites: Website[] = [];
+  errorFlag: boolean;
+  errorMsg = 'Website name is required!';
 
   constructor(private websiteService: WebsiteService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -46,6 +48,11 @@ export class WebsiteEditComponent implements OnInit {
 
   updateWebsite(){
     console.log('entering update website');
+    if (!this.website.name || this.website.name.length === 0) {
+      this.errorFlag = true;
+      return;
+    }
+
     this.websiteService.updateWebsite(this.websiteId, this.website)
       .subscribe(
         (data: any) => {

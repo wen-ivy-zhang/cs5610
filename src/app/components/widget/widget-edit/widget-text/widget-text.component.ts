@@ -18,6 +18,8 @@ export class WidgetTextComponent implements OnInit {
   pageId: string;
   widgetId: string;
   widget: Widget = new Widget('', '', '', '', '', '', '', '', '', false);
+  errorFlag: boolean;
+  errorMsg = 'Widget name is required!';
 
   constructor(private widgetService: WidgetService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -49,6 +51,11 @@ export class WidgetTextComponent implements OnInit {
 
   updateText(){
     console.log('entering update text');
+    if (!this.widget.name || this.widget.name.length === 0) {
+      this.errorFlag = true;
+      return;
+    }
+
     this.widgetService.updateWidget(this.widgetId, this.widget).subscribe(
       (data: any) => {
         this.widget = data;

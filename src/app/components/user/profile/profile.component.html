@@ -77,8 +77,11 @@
            id="last-name" name="last-name" placeholder="{{user.lastName}}">
   </div>
 
-  <a class="btn btn-primary btn-block" routerLink='/user/{{userId}}/website'>Websites</a>
-  <a class="btn btn-danger  btn-block" routerLink='/login'>Logout</a>
+  <!--<a class="btn btn-primary btn-block" routerLink='/user/{{userId}}/website'>Websites</a>-->
+  <button class="btn btn-primary btn-block" routerLink='/user/{{userId}}/website'>Websites</button>
+  <button class="btn btn-danger btn-block" type="button" (click)="DeleteUser()">Delete</button>
+  <button class="btn btn-danger btn-block" type="button" (click)="logout()">Logout</button>
+  <!--<a class="btn btn-danger  btn-block" routerLink='/login'>Logout</a>-->
 </div>
 </form>
 

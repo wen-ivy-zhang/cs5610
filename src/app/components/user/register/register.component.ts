@@ -3,6 +3,7 @@ import {UserService} from '../../../services/user.service.client';
 import {User} from '../../../models/user.model.client';
 import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
+import {SharedService} from '../../../services/shared.service';
 
 
 @Component({
@@ -19,8 +20,10 @@ export class RegisterComponent implements OnInit {
 
   errorFlag: boolean;
   errorMsg = 'Registration failed!';
+  pwErrorFlag: boolean;
+  pwErrorMsg = 'Password should be same';
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private userService: UserService, private router: Router, private sharedService: SharedService) {
   }
 
   ngOnInit() {
@@ -45,21 +48,31 @@ export class RegisterComponent implements OnInit {
 
     // call user service only if passwords match else show the same error
     if (this.password === this.vpassword) {
-      this.userService.createUser(this.username, this.password)
+
+      // this.userService.createUser(this.username, this.password) // without credential
+      this.userService.register(this.username, this.password)
         .subscribe(
         (data: any) => {
-          this.user = data;
-          console.log("checkpoint this.userId: ", this.user._id);
-          console.log("checkpoint this.username: ", this.user.username);
-          if (this.user) {
+          //this.user = data;
+          this.sharedService.user = data;
+          // console.log("checkpoint this.userId: ", this.user._id);
+          // console.log("checkpoint this.username: ", this.user.username);
+          console.log("register this.userId: ", this.sharedService.user['_id']);
+          console.log("register this.username: ", this.sharedService.user['username']);
+          if (this.sharedService.user) {
             this.errorFlag = false;
-            this.router.navigate(['/user', this.user._id]);
+            //this.router.navigate(['/user', this.user._id]);
+            this.router.navigate(['/profile']);
           }
         },
         (error: any) => {
           this.errorFlag = true;
         }
       );
+    }
+    else {
+      this.pwErrorFlag = true;
+      return;
     }
   }
 

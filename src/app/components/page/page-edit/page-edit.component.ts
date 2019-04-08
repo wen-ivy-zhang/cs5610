@@ -16,6 +16,8 @@ export class PageEditComponent implements OnInit {
   websiteId : string;
   pageId: string;
   page: Page = new Page('','','');
+  errorFlag: boolean;
+  errorMsg = 'Page name is required!';
 
   constructor(private pageService: PageService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -42,6 +44,11 @@ export class PageEditComponent implements OnInit {
 
   updatePage(){
     console.log('entering update page');
+    if (!this.page.name || this.page.name.length === 0) {
+      this.errorFlag = true;
+      return;
+    }
+
     this.pageService.updatePage(this.pageId, this.page).subscribe(
       (data: any) => {
         this.page = data;

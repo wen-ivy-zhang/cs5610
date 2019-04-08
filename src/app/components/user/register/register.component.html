@@ -6,9 +6,32 @@
   <h1>Register</h1>
 
   <form (ngSubmit)="register()" #f ="ngForm">
-    <input type="text" name="username" class="form-control" placeholder="username" ngModel required #username="ngModel"/>
-    <input type="password" name="password" class="form-control" placeholder="password" ngModel required #password="ngModel"/>
-    <input type="password" name="vpassword" class="form-control" placeholder="verify password" ngModel required #vpassword="ngModel"/>
+    <input type="text" name="username" class="form-control" placeholder="username"
+           ngModel required #username="ngModel"/>
+    <div [hidden]="username.valid || username.untouched"
+         class="alert alert-danger">
+      Name is required
+    </div>
+
+    <input type="password" name="password" class="form-control" placeholder="password"
+           ngModel required #password="ngModel"/>
+    <div [hidden]="password.untouched || password.valid "
+         class="alert alert-danger">
+      Password is required
+    </div>
+
+    <input type="password" name="vpassword" class="form-control" placeholder="verify password"
+           ngModel required #vpassword="ngModel"/>
+    <div [hidden]="vpassword.untouched || vpassword.valid "
+         class="alert alert-danger">
+      Verify Password is required
+    </div>
+
+    <div *ngIf="pwErrorFlag"
+         class="alert alert-danger">
+      {{pwErrorMsg}}
+    </div>
+
     <!--<a class="btn btn-primary btn-block" href="profile.html">Register</a>-->
     <button class = "btn btn-primary btn-block" type = "submit" [disabled]="!f.valid">Register</button>
     <a class="btn btn-danger  btn-block" routerLink ='/login'>Cancel</a>

@@ -1,6 +1,11 @@
+/*body {*/
+  /*padding-top: 70px;*/
+  /*padding-bottom: 70px;*/
+/*}*/
 
-
-
+/*input.form-control {*/
+  /*margin-bottom: 5px;*/
+/*}*/
 
 .cl-form-bottom-padding{
   margin-bottom: 2em;
@@ -14,8 +19,6 @@ a:hover{
   padding-top: 1%;
   padding-bottom: 10%;
 }
-
-
 
 .cl-text-bold{
   font-weight: bold;

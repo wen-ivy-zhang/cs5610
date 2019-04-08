@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {ModuleWithProviders, NgModule} from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './components/user/login/login.component';
 import {ProfileComponent} from './components/user/profile/profile.component';
@@ -16,7 +16,7 @@ import {WidgetHeaderComponent} from './components/widget/widget-edit/widget-head
 import {WidgetImageComponent} from './components/widget/widget-edit/widget-image/widget-image.component';
 import {WidgetYoutubeComponent} from './components/widget/widget-edit/widget-youtube/widget-youtube.component';
 import {FlickrImageSearchComponent} from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
-
+import {AuthGuard} from './services/auth-guard.service';
 
 
 
@@ -24,7 +24,8 @@ const appRoutes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'user/:uid', component: ProfileComponent},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: 'user/:uid', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'user/:uid/website', component: WebsiteListComponent},
   {path: 'user/:uid/website/new', component: WebsiteNewComponent},
   {path: 'user/:uid/website/:wid', component: WebsiteEditComponent},
@@ -37,10 +38,12 @@ const appRoutes: Routes = [
   {path: 'user/:uid/website/:wid/page/:pid/widget/:wgid/flickr', component: FlickrImageSearchComponent},
 ];
 
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes, {useHash: true});
+
 //const routes: Routes = [];
 
-@NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
+// @NgModule({
+//   imports: [RouterModule.forRoot(appRoutes)],
+//   exports: [RouterModule]
+// })
+// export class AppRoutingModule { }

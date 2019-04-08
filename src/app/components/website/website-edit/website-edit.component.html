@@ -1,4 +1,8 @@
 
+<div *ngIf="errorFlag" class = "alert alert-danger">
+  {{errorMsg}}
+</div>
+
 <form (ngSubmit)="updateWebsite()" #updateweb ="ngForm">
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
   <ul class="navbar-nav">
@@ -30,7 +34,7 @@
   </ul>
   <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-      <button class = "btn btn-primary btn-block" type = "submit">
+      <button class = "btn btn-primary btn-block" type = "submit" [disabled]="!updateweb.valid">
         <i class="fas fa-check fontawsome_icon"></i>
       </button>
     </li>
@@ -61,7 +65,12 @@
       <div class="form-group">
         <label for="website-name"> Website Name</label>
         <input [(ngModel)]="website.name" type="text" class="form-control"
-               id="website-name" name="website-name" placeholder="{{website.name}}">
+               id="website-name" name="webname" placeholder="{{website.name}}"/>
+        <!--<div [hidden]="!webname || webname.valid || webname.untouched"-->
+             <!--class="alert alert-danger">-->
+          <!--Name is required-->
+        <!--</div>-->
+
       </div>
       <div class="form-group">
         <label for="website-description">Website Description</label>

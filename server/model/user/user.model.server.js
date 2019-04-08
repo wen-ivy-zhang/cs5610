@@ -8,6 +8,7 @@ userModel.findUserByUserName = findUserByUserName;
 userModel.findByCredential = findByCredential;
 userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
+userModel.findUserByFacebookId = findUserByFacebookId;
 
 //helper function
 //userModel.populateUsers = populateUsers;
@@ -17,6 +18,10 @@ module.exports = userModel;
 // function populateUsers(users) {
 //   return userModel.insertMany(users);
 // }
+
+function findUserByFacebookId(facebookId) {
+  return userModel.findOne({"facebook.id": facebookId});
+}
 
 function createUser(user) {
   return userModel.create(user);
